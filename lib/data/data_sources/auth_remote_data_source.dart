@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:ayurvedic_centre_patients/core/api_client.dart';
 import 'package:ayurvedic_centre_patients/core/app_strings.dart';
@@ -13,11 +14,12 @@ class AuthRemoteDataSource {
       "username": username,
       "password": password,
     });
-
+    log('Login');
+    log(response.statusCode.toString());
+    
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
-      print(jsonData);
-    
+      log(jsonData.toString());  
       if (jsonData["status"] == true) {
         AppStrings.tocken = jsonData["token"];
         return UserModel.fromJson(jsonData["user_details"]);
