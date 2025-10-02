@@ -1,5 +1,6 @@
 
 import 'package:ayurvedic_centre_patients/presentation/providers/auth_provider.dart';
+import 'package:ayurvedic_centre_patients/presentation/providers/patient_provider.dart';
 import 'package:ayurvedic_centre_patients/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,8 @@ void main() async{
   di.init();
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_)=>di.sl<AuthProvider>())
+      ChangeNotifierProvider(create: (_)=>di.sl<AuthProvider>()),
+      ChangeNotifierProvider(create: (_)=>di.sl<PatientProvider>()),
     ],
     child: const MyApp()));
 }
@@ -31,3 +33,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+

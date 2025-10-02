@@ -16,7 +16,7 @@ class ApiClient {
     return response;
   }
 
-  Future<http.Response> get(String endPoints, String tocken) async {
+  Future<http.Response> get(String endPoints) async {
     final url = Uri.parse(baseUrl + endPoints);
     log(url.toString());
     final response = await http.get(

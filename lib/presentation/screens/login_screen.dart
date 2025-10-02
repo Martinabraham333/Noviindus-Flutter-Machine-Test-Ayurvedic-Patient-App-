@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:ayurvedic_centre_patients/core/widgets/custom_button.dart';
@@ -17,9 +16,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController(text: 'test_user');
 
-  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController(text: '12345678');
 
   @override
   void dispose() {
@@ -30,10 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+    
 
     return Scaffold(
       body: authProvider.isLoading
-          ? const CircularProgressIndicator()
+          ? Center(child: const CircularProgressIndicator(color: Colors.green,))
           : SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -137,18 +137,20 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (authProvider.userDeatils != null) {
+       Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => PatientListScreen()),
+        );
+        
+
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Login successful!"),
           backgroundColor: Colors.green,
         ),
       );
-      Future.delayed(const Duration(milliseconds: 500), () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => PatientListScreen()),
-        );
-      });
+     
     }
     else{
       ScaffoldMessenger.of(context).showSnackBar(
